@@ -60,7 +60,7 @@ $control = new Mesa_Controller();
                      <a href="editar.php?id=<?php echo $r->num_mesa; ?>" class="btn btn-primary" style=" background:#171616"> <span class="lnr lnr-pencil"></span> </a>
                 </td>
                 <td>
-                     <a href="../pedidos/agregarP.php?m=<?php echo $r->num_mesa;?>" class="btn btn-primary  <?php echo $r->__GET('estado')== 1 ? '' : 'disabled';?>" style=" background:#171616">Hacer Pedido</a>
+                     <a href="../pedidos/agregarP.php?m=<?php echo $r->num_mesa;?>" class="btn btn-primary" style=" background:#171616">Hacer Pedido</a>
                 </td>
         </tbody>
         <?php endforeach; ?>
