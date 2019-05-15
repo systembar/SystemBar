@@ -33,7 +33,14 @@ img {
     margin-right: 15px;
     list-style-type: none;
     display: inline-block;
+    height: 100%;
+    padding: 5px;
 }
+
+.header_admin li:hover{
+   background:rgba(255, 255, 255, 0.22); 
+}
+
 
 .header_admin a {
     text-decoration: none;
@@ -45,7 +52,6 @@ img {
 
 .header_admin li a:hover {
 
-    color: #cb2f00;
     text-decoration: none;
 }
 

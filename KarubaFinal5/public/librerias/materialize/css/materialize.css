@@ -3383,7 +3383,7 @@ span.badge.new {
 }
 
 span.badge.new:after {
-  content: " new";
+  content: " Nuevos";
 }
 
 span.badge[data-badge-caption]::after {

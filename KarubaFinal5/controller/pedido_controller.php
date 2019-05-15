@@ -10,7 +10,33 @@ class Pedido_Controller extends Conexion
 	public function listar()
 	{
 		$datos=array();
-		$consulta="SELECT * FROM tbl_pedido ORDER BY id_pedido desc";
+		$consulta="SELECT pe.id_pedido,pe.fecha, m.nombre num_mesa ,pe.estado,r.nombre responsable,pe.total,pe.descuento,pe.subtotal FROM tbl_pedido pe join tbl_mesa m on pe.num_mesa=m.num_mesa join tbl_usuario r on pe.responsable=r.cedula ORDER BY id_pedido desc";
+		//$consulta="SELECT p.id_pedido,p.fecha,p.num_mesa,p.total ,r.nombre from tbl_usuario r join tbl_pedido p on r.cedula=p.responsable ";
+		try {
+			$resultado=$this->conexion->prepare($consulta);
+			$resultado->execute();
+			foreach ($resultado->fetchAll(PDO::FETCH_OBJ) as $datos) {
+				$pedido = new Pedido();
+				$pedido->__SET('id_pedido',$datos->id_pedido);
+				$pedido->__SET('fecha',$datos->fecha);
+				$pedido->__SET('num_mesa',$datos->num_mesa);
+				$pedido->__SET('estado',$datos->estado);
+				$pedido->__SET('responsable',$datos->responsable);
+				$pedido->__SET('total',$datos->total);
+				$pedido->__SET('subtotal',$datos->subtotal);
+				$pedido->__SET('descuento',$datos->descuento);
+				$dato[]=$pedido;
+			}
+			return $dato;
+		} catch (Exception $e) {
+			die($e->getMessage());
+		}
+	}
+    
+    public function listarBarman()
+	{
+		$datos=array();
+		$consulta="SELECT * FROM tbl_pedido WHERE estado=1 ORDER BY id_pedido desc";
 		//$consulta="SELECT p.id_pedido,p.fecha,p.num_mesa,p.total ,r.nombre from tbl_usuario r join tbl_pedido p on r.cedula=p.responsable ";
 		try {
 			$resultado=$this->conexion->prepare($consulta);
@@ -192,5 +218,37 @@ class Pedido_Controller extends Conexion
 			echo "error al cambiar estado".$e->getMessage();
 		}
 	}
+    
+    public function Notificaciones()
+    {
+     
+        $notificaciones="SELECT * from tbl_pedido where estado=1";
+        $Npedido=$this->conexion->prepare($notificaciones);
+        $Npedido->execute();
+        $n=$Npedido->fetchAll();
+        $noti=count($n);
+        return $noti;
+    
+    }
+    
+    public function Reporte($id_pedido)
+    {
+        $consulta="select u.nombre,u.apellido, p.total, p.descuento, p.subtotal, m.nombre as mesa  from tbl_pedido p join tbl_usuario u on p.responsable=u.cedula join tbl_mesa m on p.num_mesa=m.num_mesa where id_pedido=$id_pedido ";
+        $resultado=$this->conexion->prepare($consulta);
+        $resultado->execute();
+        
+        return $resultado;
+    }
+    
+        public function ReporteP($id_pedido)
+    {
+        $consultaP="SELECT p.nombre, p.precio ,d.cantidad, d.precioAcumulado FROM tbl_dlle_producto_pedido d join tbl_producto p on d.id_producto = p.id_producto WHERE d.id_pedido=$id_pedido ";
+        $resultadoP=$this->conexion->prepare($consultaP);
+        $resultadoP->execute();
+        
+        return $resultadoP;
+    }
+    
+    
 }
 ?>

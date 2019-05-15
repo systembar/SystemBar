@@ -6,7 +6,7 @@ class User_Controller extends Conexion
 	public function listar()
 	{
 		$datos=array();
-		$consulta="SELECT * FROM tbl_usuario WHERE tipo_usuario!='1' ORDER BY cedula DESC ";
+		$consulta="SELECT u.cedula,u.nombre nombre,u.apellido,u.telefono,u.celular,u.foto,u.correo,tu.nombre tipo_usuario,td.nombre tipo_documento,u.estado,u.usuario,u.pass FROM tbl_usuario u join tbl_tipo_usuario tu on u.tipo_usuario=tu.id_tipoUsuario join tbl_tipo_documento td on u.tipo_documento=td.id_tipoDocumento WHERE tipo_usuario!='1' ORDER BY cedula DESC";
 		try {
 			$resultado=$this->conexion->prepare($consulta);
 			$resultado->execute();

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-04-2019 a las 06:12:00
--- Versión del servidor: 10.1.34-MariaDB
--- Versión de PHP: 7.2.8
+-- Tiempo de generación: 15-05-2019 a las 13:29:04
+-- Versión del servidor: 10.1.38-MariaDB
+-- Versión de PHP: 7.3.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -41,17 +41,18 @@ CREATE TABLE `tbl_dlle_producto_pedido` (
 --
 
 INSERT INTO `tbl_dlle_producto_pedido` (`id`, `id_producto`, `id_pedido`, `cantidad`, `precioAcumulado`) VALUES
-(55, 1, 38, 123232, 2464640000),
-(56, 1, 39, 23, 460000),
-(57, 1, 40, 2, 40000),
-(58, 2, 40, 3, 150000),
-(59, 1, 41, 1, 20000),
-(60, 1, 41, 2, 40000),
-(61, 1, 41, 3, 60000),
-(62, 1, 41, 4, 80000),
-(63, 1, 42, 2, 40000),
-(64, 2, 42, 4, 200000),
-(65, 7, 42, 2, 4000);
+(275, 1, 109, 1, 20000),
+(276, 1, 109, 1, 20000),
+(278, 1, 109, 2, 40000),
+(279, 1, 110, 1, 20000),
+(280, 1, 111, 3, 60000),
+(281, 1, 112, 2, 40000),
+(282, 1, 113, 2, 40000),
+(283, 1, 114, 1, 20000),
+(284, 2, 114, 1, 50000),
+(285, 7, 114, 1, 2000),
+(286, 1, 114, 2, 40000),
+(287, 1, 115, 1, 20000);
 
 -- --------------------------------------------------------
 
@@ -70,7 +71,7 @@ CREATE TABLE `tbl_mesa` (
 --
 
 INSERT INTO `tbl_mesa` (`num_mesa`, `nombre`, `estado`) VALUES
-(1, 'mesa 1', 1),
+(1, 'mesa 1', 0),
 (2, 'mesa 2', 0);
 
 -- --------------------------------------------------------
@@ -85,19 +86,23 @@ CREATE TABLE `tbl_pedido` (
   `num_mesa` int(2) NOT NULL,
   `estado` tinyint(1) NOT NULL,
   `responsable` int(20) NOT NULL,
-  `total` double DEFAULT NULL
+  `total` double DEFAULT NULL,
+  `descuento` int(11) NOT NULL,
+  `subtotal` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tbl_pedido`
 --
 
-INSERT INTO `tbl_pedido` (`id_pedido`, `fecha`, `num_mesa`, `estado`, `responsable`, `total`) VALUES
-(38, '2019-04-05 15:10:35', 1, 1, 123, 2464640000),
-(39, '2019-04-05 15:12:12', 1, 0, 123, 460000),
-(40, '2019-04-05 15:48:08', 1, 0, 123, 190000),
-(41, '2019-04-07 21:39:17', 1, 0, 123, 200000),
-(42, '2019-04-07 23:06:05', 1, 1, 123, 244000);
+INSERT INTO `tbl_pedido` (`id_pedido`, `fecha`, `num_mesa`, `estado`, `responsable`, `total`, `descuento`, `subtotal`) VALUES
+(109, '2019-05-13 16:36:32', 2, 0, 123, 80000, 0, 0),
+(110, '2019-05-13 16:46:42', 2, 0, 123, 20000, 0, 20000),
+(111, '2019-05-13 16:47:52', 2, 0, 123, 60000, 50, 30000),
+(112, '2019-05-13 16:48:47', 2, 0, 123, 20000, 50, 40000),
+(113, '2019-05-13 16:50:33', 2, 1, 123, 20000, 50, 40000),
+(114, '2019-05-14 10:13:35', 2, 1, 123, 92000, 0, 70000),
+(115, '2019-05-14 14:18:40', 2, 1, 123, 20000, 0, 20000);
 
 -- --------------------------------------------------------
 
@@ -196,7 +201,7 @@ INSERT INTO `tbl_usuario` (`cedula`, `nombre`, `apellido`, `telefono`, `celular`
 (74646, 'simon', 'gomez', 878786, 56464645, NULL, 'caro@g.c', 2, 1, 1, 'simon', '202cb962ac59075b964b07152d234b70'),
 (87654, 'caro', 'gomez', 3216548, 2147483647, NULL, 'caro@g.c', 2, 1, 1, 'caro', '202cb962ac59075b964b07152d234b70'),
 (100287, 'caro', 'gomez', 6037390, 2147483647, NULL, 'gfgkm@g.com', 2, 1, 1, 'caro', '202cb962ac59075b964b07152d234b70'),
-(75034284, 'hola', 'ghfhfg', 4263, 552, NULL, 'gfgkm@g.com', 2, 1, 1, 'hola', '202cb962ac59075b964b07152d234b70'),
+(75034284, 'hola', 'ghfhfg', 4263, 552, NULL, 'gfgkm@g.com', 3, 1, 1, 'hola', '202cb962ac59075b964b07152d234b70'),
 (1002878805, 'Carolina', 'Gomez', 6037390, 2147483647, NULL, 'carito@kf.dd', 2, 1, 1, 'caro', '202cb962ac59075b964b07152d234b70'),
 (1152700958, 'leon alexis', 'zapata', 56546, 5415451, NULL, 'hgsd@dkjv.f', 2, 1, 1, 'alexis', '202cb962ac59075b964b07152d234b70');
 
@@ -260,7 +265,7 @@ ALTER TABLE `tbl_usuario`
 -- AUTO_INCREMENT de la tabla `tbl_dlle_producto_pedido`
 --
 ALTER TABLE `tbl_dlle_producto_pedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=288;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_mesa`
@@ -272,7 +277,7 @@ ALTER TABLE `tbl_mesa`
 -- AUTO_INCREMENT de la tabla `tbl_pedido`
 --
 ALTER TABLE `tbl_pedido`
-  MODIFY `id_pedido` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id_pedido` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_producto`

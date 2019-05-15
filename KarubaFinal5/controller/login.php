@@ -37,6 +37,9 @@ class IniciarSesion extends Conexion
 				    case '2':
 						header("location:../mesas/listar.php");
 						break;
+                    case '3':
+						header("location:../mesas/listar.php");
+						break;
 					default:
 						echo "error al iniciar sesion";
 						break;

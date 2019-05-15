@@ -13,6 +13,7 @@ $session= $_SESSION['usuario'];
 $varsesion = $session->cedula;
 $vartipo =  $session->tipo_usuario;
 
+
 if ($varsesion == null || $varsesion = '' ){
     echo 'Usted no tiene autorizacion';
     header("Location:../gestion/vlogin.php");
@@ -22,8 +23,11 @@ if ($varsesion == null || $varsesion = '' ){
 if($vartipo==1){
     require_once '../template/header.php';
 
-}else if($vartipo == 2 || $vartipo == 3){
+}else if($vartipo == 2 ){
      require_once '../template/header2.php';
+}else if($vartipo == 3){
+         require_once '../template/header3.php';
+
 }
 
 
