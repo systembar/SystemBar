@@ -1,0 +1,117 @@
+.tabla{
+    width:90%;
+    margin-top: 10%;
+    margin-left: 5%;
+    z-index: 10;
+}
+
+body{
+    overflow-x:hidden;
+}
+.page-item.active .page-link{
+    background-color:#f76100;
+    border-color:#f76100;
+}
+
+.page-link {
+    color: #f76100;
+}
+.page-link:hover{
+    color: #f76100;
+}
+
+th {
+  
+    border-bottom: 3px solid #9ea7af;
+    font-size: 16px;
+    text-align: left;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    vertical-align: middle;
+    font-family:serif;
+}
+
+tr {
+    border-top: 1px solid #C1C3D1;
+    border-bottom: 1px solid #C1C3D1;
+    font-size: 16px;
+    height: 60px;
+    font-weight: normal;
+    text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+}
+
+tr:hover tr {
+    background: #f76100;
+    color: #FFFFFF;
+    border-top: 1px solid #171717;
+}
+
+td {
+    background: #FFFFFF;
+    text-align: left;
+    vertical-align: middle;
+    font-weight: 100;
+    font-size: 14px;
+    text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+}
+
+
+a {
+    text-decoration: none;
+    height: auto;
+
+}
+
+.btn{
+    background: #f76100;
+}
+
+
+/*----------check estado-------*/
+
+
+.checkboxWrapper {
+  width: 60px;
+  height: 25px;
+  position: relative;
+  -webkit-border-radius: 60px;
+  -moz-border-radius: 60px;
+  border-radius: 60px;
+  background: #fff;
+}
+
+.checkboxWrapper label {
+  position: absolute;
+  left: 26px;
+  top: 2.5px;
+  width: 30px;
+  height: 20px;
+  -webkit-border-radius: 28px;
+  -moz-border-radius: 28px;
+  border-radius: 28px;
+  background: #545a5d;
+  -webkit-transition: .2s;
+  -moz-transition: .2s;
+  -ms-transition: .2s;
+  -o-transition: .2s;
+  transition: .2s;
+  cursor: pointer;
+}
+
+.checkboxWrapper input[type=checkbox] {
+  display: none;
+}
+
+.checkboxWrapper input[type=checkbox]:checked + label {
+  left: 4px;
+  background: #f76100;
+}
+
+
+@media (max-width: 539px) {
+    
+    
+    .tabla{
+        margin-left: 46%;
+    }
+    
+}
